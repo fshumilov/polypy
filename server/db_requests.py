@@ -12,7 +12,7 @@ from config import DB_SETTINGS
 3 tables: schema.table_name: (column_names)
     campusplastics.polymer_catalog: ("id", "polymer_name")
     campusplastics.property_type: ("id", "polymer_catalog_id", "property_type")
-    campusplastics.property_value: ("id", "property_type_id", "property_name", "value", "unit", "test_standart")
+    campusplastics.property_value: ("id", "property_type_id", "property_name", "value", "unit", "test_standard")
 """
 
 
@@ -94,7 +94,10 @@ def get_property_value():
     :return: a dataframe
     """
     sql_query_property_name = "SELECT * FROM campusplastics.property_value"
-    column_names_property_name = ["id", "property_type_id", "property_name", "value", "unit", "test_standart"]
+    column_names_property_name = [
+        "id", "property_type_id", "property_name",
+        "value_double", "value_text", "unit", "test_standard"
+    ]
     data = _get_data(sql_query_property_name, column_names_property_name)
     df = _convert_to_df(data, column_names_property_name)
     return df
