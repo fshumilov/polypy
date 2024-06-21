@@ -22,10 +22,12 @@ cursor = conn.cursor()
 create_table_query = '''
 CREATE TABLE IF NOT EXISTS campusplastics.property_value (
     id SERIAL PRIMARY KEY,
+    property_type_ids INTEGER,
+    property_name TEXT,
     value_double DOUBLE PRECISION,
     value_text TEXT,
-    property_type_ids INTEGER,
-    property_name TEXT
+    unit TEXT,
+    test_standard TEXT    
 )
 '''
 cursor.execute(create_table_query)
@@ -34,10 +36,15 @@ conn.commit()
 # Step 4: Insert data into the table
 for _, row in df.iterrows():
     insert_query = '''
-    INSERT INTO property_value (value_double, value_text, property_type_ids, property_name)
-    VALUES (%s, %s, %s, %s)
+    INSERT INTO campusplastics.property_value (
+    property_type_ids, property_name, value_double, value_text, unit, test_standard)
+    VALUES (%s, %s, %s, %s, %s, %s)
     '''
-    cursor.execute(insert_query, (row['value_double'], row['value_text'], row['property_type_ids'], row['property_name']))
+    cursor.execute(insert_query, (
+        row['property_type_ids'], row['property_name'],
+        row['value_double'], row['value_text'],
+        row['unit'], row['test_standard']
+    ))
     conn.commit()
 
 # Step 5: Close the connection
