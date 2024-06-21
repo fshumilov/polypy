@@ -1,0 +1,11 @@
+Mechanical properties,Value,Unit,Test Standard
+Tensile modulus,2000,MPa,ISO 527-1/-2
+Yield stress,50,MPa,ISO 527-1/-2
+Yield strain,12,%,ISO 527-1/-2
+Nominal strain at break,45,%,ISO 527-1/-2
+"Tensile creep modulus, 1h",1550,MPa,ISO 899-1
+"Tensile creep modulus, 1000h",1050,MPa,ISO 899-1
+"Charpy impact strength, +23°C",N,kJ/m²,ISO 179/1eU
+"Charpy impact strength, -30°C",230,kJ/m²,ISO 179/1eU
+"Charpy notched impact strength, +23°C",11,kJ/m²,ISO 179/1eA
+"Charpy notched impact strength, -30°C",6.5,kJ/m²,ISO 179/1eA

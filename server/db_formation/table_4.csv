@@ -1,0 +1,9 @@
+Electrical properties,Value,Unit,Test Standard
+"Relative permittivity, 100Hz",4,-,IEC 62631-2-1
+"Relative permittivity, 1MHz",4,-,IEC 62631-2-1
+"Dissipation factor, 100Hz",100,E-4,IEC 62631-2-1
+"Dissipation factor, 1MHz",140,E-4,IEC 62631-2-1
+Volume resistivity,1E12,Ohm*m,IEC 62631-3-1
+Surface resistivity,1E14,Ohm,IEC 62631-3-2
+Electric strength,40,kV/mm,IEC 60243-1
+Comparative tracking index,600,-,IEC 60112

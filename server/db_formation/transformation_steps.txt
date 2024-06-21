@@ -1,0 +1,12 @@
+# Data collection steps:
+
+1) Download data from an external source page into the .html file
+input: page URL
+output: .html file
+2) Parse needed table infor from the .html file into the csv file
+input: .html file
+output: united csv file
+3) Unite the all csv files into one data frame
+4) Separate data values into values_double and values_text
+5) Add foreign keys for property_type_ids
+6) Import the data into the data base
