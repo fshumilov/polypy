@@ -5,6 +5,7 @@ import numpy as np
 Step 1: Split 'Value' column into 'value_double' and 'value_text'
 Step 2: Add 'property_type_ids' column
 Step 3: Unite all property columns into "property_name" and remove "Value" column
+Step 4: Rename "Unit" to "unit" and "Test Standard" to "test_standard"
 """
 
 # Load the CSV file
@@ -44,6 +45,12 @@ df['property_name'] = df[property_columns].bfill(axis=1).iloc[:, 0]
 # Drop the original property columns
 df.drop(columns=property_columns, inplace=True)
 df.drop(columns=['Value'], inplace=True)
+
+# Step 4: Rename the columns
+df.rename(columns={
+    'Unit': 'unit',
+    'Test Standard': 'test_standard'
+}, inplace=True)
 
 # Save the modified DataFrame to a new CSV file
 df.to_csv('transformed.csv', index=False)
