@@ -37,7 +37,7 @@ def determine_property_type_id(row):
             return i + 1
     return np.nan
 
-df['property_type_ids'] = df.apply(determine_property_type_id, axis=1)
+df['property_type_id'] = df.apply(determine_property_type_id, axis=1)
 
 # Step 3: Unite all property columns into "property_name"
 df['property_name'] = df[property_columns].bfill(axis=1).iloc[:, 0]

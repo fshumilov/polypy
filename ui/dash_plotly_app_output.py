@@ -1,17 +1,17 @@
 from dash import Dash, html, dash_table, dcc, callback, Output, Input
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 
-
 from server.db_requests import get_property_type, get_property_value
-
 
 # Sample data for the dropdown options
 df_dropdown_polymer_type = ['Polyurethane']
 # Get a dataframe from the data base
 df_property_type = get_property_type()
 df_property_value = get_property_value()
+print(df_property_value.columns)
 
 # List data for property dropdowns
 dropdown_1_property = df_property_type['property_type'].tolist()
@@ -19,12 +19,19 @@ dropdown_2_property = df_property_type['property_type'].tolist()
 
 
 # MainPanel data
-# df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/raw/a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv')
-# print(df.head())
-#
-# fig = px.scatter(df, x="gdp per capita", y="life expectancy",
-#                  size="population", color="continent", hover_name="country",
-#                  log_x=True, size_max=60)
+# Define the initial figure with a message
+def create_initial_figure():
+    fig = go.Figure()
+    fig.add_annotation(
+        x=0.5, y=0.5, text="Not all parameters are selected",
+        showarrow=False, font=dict(size=20), xref="paper", yref="paper"
+    )
+    fig.update_layout(
+        xaxis=dict(visible=False),
+        yaxis=dict(visible=False)
+    )
+    return fig
+
 
 #  Styles
 sidebar_style = {
@@ -107,7 +114,7 @@ app.layout = dbc.Container([
             '''),
             dcc.Graph(
                 id='graph',
-                figure=fig
+                figure=create_initial_figure()
             )
         ], style=main_panel_style)
     ])
@@ -164,6 +171,7 @@ def filter_property_names(selected_value):
                                df_filtered_property_value['property_name'].tolist()]
     return filtered_property_names
 
+
 # Callback to update the graph based on selected parameters
 @app.callback(
     Output('graph', 'figure'),
@@ -171,35 +179,49 @@ def filter_property_names(selected_value):
     Input('dd_second_property_name', 'value')
 )
 def update_graph(param1, param2):
-    if param1 and param2:
+    if param1 and param2:  # e.g. "Load" and "Density"
         # Retrieve values for the selected parameters
-        values1_double = df[df['parameter'] == param1]['values_double'].values
-        values2_double = df[df['parameter'] == param2]['values_double'].values
-        values1_text = df[df['parameter'] == param1]['values_text'].values
-        values2_text = df[df['parameter'] == param2]['values_text'].values
+        print("___________________________________")
+        values1_double = df_property_value[
+            df_property_value['property_name'] == param1
+            ]['value_double'].values
+        print(values1_double)
+        values2_double = df_property_value[
+            df_property_value['property_name'] == param2
+            ]['value_double'].values
+        print(values2_double)
+
+        values1_text = df_property_value[
+            df_property_value['property_name'] == param1
+            ]['value_text'].values
+        print(values1_text)
+        values2_text = df_property_value[
+            df_property_value['property_name'] == param2
+            ]['value_text'].values
+        print(values2_text)
 
         # Determine the type of values and generate the appropriate plot
-        if values1_double.size > 0 and values2_double.size > 0:
+        if not pd.isna(values1_double).all() and not pd.isna(values2_double).all():
             # Both parameters are double: Scatter plot
             fig = px.scatter(x=values1_double, y=values2_double, labels={'x': param1, 'y': param2})
-        elif values1_text.size > 0 and values2_text.size > 0:
+        elif values1_text != "NaN" and values2_text != "NaN":
             # Both parameters are text: Heatmap
             fig = px.density_heatmap(
                 x=values1_text, y=values2_text, labels={'x': param1, 'y': param2}
             )
-        elif values1_double.size > 0 and values2_text.size > 0:
+        elif not pd.isna(values1_double).all() and values2_text != "NaN":
             # Parameter 1 is double and Parameter 2 is text: Histogram
             fig = px.histogram(x=values1_double, color=values2_text, labels={'x': param1, 'color': param2})
+        elif not pd.isna(values2_double).all() and values1_text != "NaN":
+            # Parameter 2 is double and Parameter 1 is text: Histogram
+            fig = px.histogram(x=values2_double, color=values1_text, labels={'x': param1, 'color': param2})
         else:
             # Handle the case where data types are mismatched or no data is available
-            fig = px.scatter()
+            fig = create_initial_figure()
 
         return fig
     else:
-        return px.scatter()
-# fig = px.scatter(df, x="gdp per capita", y="life expectancy",
-#                  size="population", color="continent", hover_name="country",
-#                  log_x=True, size_max=60)
+        return create_initial_figure()
 
 
 # Run the app
