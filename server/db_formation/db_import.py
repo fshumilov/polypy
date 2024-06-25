@@ -22,7 +22,7 @@ cursor = conn.cursor()
 create_table_query = '''
 CREATE TABLE IF NOT EXISTS campusplastics.property_value (
     id SERIAL PRIMARY KEY,
-    property_type_ids INTEGER,
+    property_type_id INTEGER,
     property_name TEXT,
     value_double DOUBLE PRECISION,
     value_text TEXT,
@@ -37,11 +37,11 @@ conn.commit()
 for _, row in df.iterrows():
     insert_query = '''
     INSERT INTO campusplastics.property_value (
-    property_type_ids, property_name, value_double, value_text, unit, test_standard)
+    property_type_id, property_name, value_double, value_text, unit, test_standard)
     VALUES (%s, %s, %s, %s, %s, %s)
     '''
     cursor.execute(insert_query, (
-        row['property_type_ids'], row['property_name'],
+        row['property_type_id'], row['property_name'],
         row['value_double'], row['value_text'],
         row['unit'], row['test_standard']
     ))
