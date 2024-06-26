@@ -2,7 +2,7 @@ import pandas as pd
 import psycopg2
 
 
-from config import DB_SETTINGS
+from config.db_config import DB_SETTINGS
 
 # Step 1: Read the CSV file into a DataFrame
 csv_file_path = 'transformed.csv'

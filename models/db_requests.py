@@ -2,7 +2,7 @@ import pandas as pd
 import psycopg2.extras
 
 
-from config import DB_SETTINGS
+from config.db_config import DB_SETTINGS
 
 """
 - the code made based on https://www.youtube.com/watch?v=M2NzvnfS-hI&ab_channel=techTFQ
