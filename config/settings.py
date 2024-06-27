@@ -1,4 +1,4 @@
-from models.db_requests import get_property_type, get_property_value
+from models.db_requests import get_property_type, get_property_value, get_polymer_catalog
 
 
 # The dash app config
@@ -11,6 +11,7 @@ config = {
 df_dropdown_polymer_type = ['Polyurethane']
 df_property_type = get_property_type()
 df_property_value = get_property_value()
+df_polymer_name = get_polymer_catalog()
 
 # List data for property dropdowns
 dropdown_1_property = df_property_type['property_type'].tolist()
