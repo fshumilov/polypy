@@ -30,5 +30,6 @@ class TestDbRequests(unittest.TestCase):
         self.assertEqual(df.shape, (2, 2))  # check if the dataframe has the correct shape
         self.assertListEqual(list(df.columns), ["id", "polymer_name"])  # check if the dataframe has the correct columns
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,8 @@
 # ui/__init__.py
 
 # Optional: Import specific functions/classes from modules within the package
-from .config.db_config import DB_SETTINGS
+# from .config.db_config import DB_SETTINGS
+# from config.db_config import DB_SETTINGS
 
 # You can define variables or perform other initialization actions here if needed
 # For example:

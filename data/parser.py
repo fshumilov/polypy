@@ -12,7 +12,7 @@ import csv
 """
 
 # Load the HTML content from the file
-file_path = 'downloaded_page_kristina.html'
+file_path = '2.html'
 with open(file_path, 'r', encoding='utf-8') as file:
     html_content = file.read()
 
