@@ -67,7 +67,7 @@ def register_callbacks(app):
     def update_graph(param1, param2):
         if param1 and param2:  # e.g. "Load" and "Density"
             # Retrieve values for the selected parameters
-            log_callbacks.debug("New parameters:")
+            log_callbacks.debug("New selected parameters:")
             values1_double = df_property_value[
                 df_property_value['property_name'] == param1
                 ]['value_double'].values
@@ -109,7 +109,7 @@ def register_callbacks(app):
                     ),
                     hovertext=polymer_name
                 )
-            elif values1_text != "NaN" and values2_text != "NaN":
+            elif values1_text.all() != "NaN" and values2_text.all() != "NaN":
                 # Both parameters are text: Heatmap
                 fig = px.density_heatmap(
                     x=values1_text, y=values2_text,
@@ -123,7 +123,7 @@ def register_callbacks(app):
                         f'{param2}: %{{y}}'
                     )
                 )
-            elif not pd.isna(values1_double).all() and values2_text != "NaN":
+            elif not pd.isna(values1_double).all() and values2_text.all() != "NaN":
                 # Parameter 1 is double and Parameter 2 is text: Histogram
                 fig = px.histogram(
                     x=values1_double, color=values2_text,
@@ -136,7 +136,7 @@ def register_callbacks(app):
                         f'{param2}: {values2_text}'
                     )
                 )
-            elif not pd.isna(values2_double).all() and values1_text != "NaN":
+            elif not pd.isna(values2_double).all() and values1_text.all() != "NaN":
                 # Parameter 2 is double and Parameter 1 is text: Histogram
                 fig = px.histogram(
                     x=values2_double, color=values1_text,
