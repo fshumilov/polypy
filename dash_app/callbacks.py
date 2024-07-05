@@ -1,10 +1,15 @@
-from dash.dependencies import Input, Output
+import logging
 import pandas as pd
 import plotly.express as px
+from dash.dependencies import Input, Output
+
 
 from config.settings import df_property_type, df_property_value, df_polymer_name
-from .layout_elements import create_initial_figure
+from dash_app.layout_elements import create_initial_figure
 
+
+# Set the logging group
+log_callbacks = logging.getLogger("callbacks")
 
 def register_callbacks(app):
     # Callbacks to update the second dropdown based on the first dropdown selection
@@ -62,24 +67,25 @@ def register_callbacks(app):
     def update_graph(param1, param2):
         if param1 and param2:  # e.g. "Load" and "Density"
             # Retrieve values for the selected parameters
-            print("___________________________________")
+            log_callbacks.debug("New parameters:")
             values1_double = df_property_value[
                 df_property_value['property_name'] == param1
                 ]['value_double'].values
-            print(values1_double)
+            log_callbacks.debug(f"1st double value: {values1_double}")
             values2_double = df_property_value[
                 df_property_value['property_name'] == param2
                 ]['value_double'].values
-            print(values2_double)
+            log_callbacks.debug(f"2st double value: {values2_double}")
 
             values1_text = df_property_value[
                 df_property_value['property_name'] == param1
                 ]['value_text'].values
-            print(values1_text)
+            log_callbacks.debug(f"1st text value: {values1_text}")
             values2_text = df_property_value[
                 df_property_value['property_name'] == param2
                 ]['value_text'].values
-            print(values2_text)
+            log_callbacks.debug(f"2st text value: {values2_text}")
+
 
             # Retrieve value units for selected parameter
             unit1 = df_property_value[df_property_value['property_name'] == param1]['unit'].values
