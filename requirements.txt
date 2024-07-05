@@ -1,7 +1,11 @@
-covarage=7.5.4
+coverage=7.5.4
 pytest
-dash=2.17.0
-pandas=2.2.2
-psycopg2=2.9.9
-nympy=1.26.4
 pytest-mock=3.14.0
+
+pandas~=2.2.2
+beautifulsoup4~=4.12.3
+psycopg2~=2.9.9
+requests~=2.32.2
+numpy~=1.26.4
+dash~=2.17.0
+plotly~=5.22.0
