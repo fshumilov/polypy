@@ -14,5 +14,6 @@ Used tools and libraries:
 
 # Hot to use
 (The project doesn't work without the local database)
-1) Run the app.py
-2) The dash app is running on http://127.0.0.1:8050/
+1) Download the app code
+2) Run the app.py
+3) Open the app locally that is running on http://127.0.0.1:8050/
