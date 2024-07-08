@@ -1,7 +1,7 @@
-# server/__init__.py
+# ui/dash_app/__init__.py
 
 # Optional: Import specific functions/classes from modules within the package
-from .db_requests import get_polymer_catalog, get_property_type, get_property_value
+# from .config.db_config import DB_SETTINGS
 
 # You can define variables or perform other initialization actions here if needed
 # For example:

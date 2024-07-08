@@ -2,7 +2,7 @@ import pandas as pd
 import psycopg2.extras
 
 
-from config import DB_SETTINGS
+from config.db_config import DB_SETTINGS, SQL_QUERIES, COLUMN_NAMES
 
 """
 - the code made based on https://www.youtube.com/watch?v=M2NzvnfS-hI&ab_channel=techTFQ
@@ -12,7 +12,7 @@ from config import DB_SETTINGS
 3 tables: schema.table_name: (column_names)
     campusplastics.polymer_catalog: ("id", "polymer_name")
     campusplastics.property_type: ("id", "polymer_catalog_id", "property_type")
-    campusplastics.property_value: ("id", "property_type_id", "property_name", "value", "unit", "test_standart")
+    campusplastics.property_value: ("id", "property_type_id", "property_name", "value", "unit", "test_standard")
 """
 
 
@@ -69,8 +69,8 @@ def get_polymer_catalog():
     Get the data from a database
     :return: a dataframe
     """
-    sql_query_polymer_catalog = "SELECT * FROM campusplastics.polymer_catalog"
-    column_names_polymer_catalog = ["id", "polymer_name"]
+    sql_query_polymer_catalog = SQL_QUERIES['polymer_catalog']
+    column_names_polymer_catalog = COLUMN_NAMES['polymer_catalog']
     data = _get_data(sql_query_polymer_catalog, column_names_polymer_catalog)
     df = _convert_to_df(data, column_names_polymer_catalog)
     return df
@@ -81,8 +81,8 @@ def get_property_type():
     Get the data from a database
     :return: a dataframe
     """
-    sql_query_property_type = "SELECT * FROM campusplastics.property_type"
-    column_names_property_type = ["id", "polymer_catalog_id", "property_type"]
+    sql_query_property_type = SQL_QUERIES['property_type']
+    column_names_property_type = COLUMN_NAMES['property_type']
     data = _get_data(sql_query_property_type, column_names_property_type)
     df = _convert_to_df(data, column_names_property_type)
     return df
@@ -93,8 +93,8 @@ def get_property_value():
     Get the data from a database
     :return: a dataframe
     """
-    sql_query_property_name = "SELECT * FROM campusplastics.property_value"
-    column_names_property_name = ["id", "property_type_id", "property_name", "value", "unit", "test_standart"]
+    sql_query_property_name = SQL_QUERIES['property_value']
+    column_names_property_name = COLUMN_NAMES['property_value']
     data = _get_data(sql_query_property_name, column_names_property_name)
     df = _convert_to_df(data, column_names_property_name)
     return df
