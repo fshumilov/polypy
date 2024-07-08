@@ -1,7 +1,7 @@
 import logging
 import pandas as pd
 from bs4 import BeautifulSoup
-import csv
+
 
 """
 1) Load and parse the HTML file.
@@ -24,7 +24,7 @@ logging.basicConfig(
 log_parser = logging.getLogger("parser")
 
 # Load the HTML content from the file
-file_path = '2.html'
+file_path = '3.html'
 with open(file_path, 'r', encoding='utf-8') as file:
     html_content = file.read()
 
@@ -33,7 +33,13 @@ soup = BeautifulSoup(html_content, 'html.parser')
 
 # Extract the title of the page
 page_title = soup.title.string if soup.title else "No title found"
-log_parser.info(f"Page Title: {page_title}")
+log_parser.debug(f"Page Title: {page_title}")
+# Splitting the title
+words_list = str(page_title).split()
+split_page_title = ' '.join(words_list[3:])
+page_title = split_page_title
+log_parser.info(f'Polymer title: {page_title}')
+
 # Extract the polymer name into the .csv file to import
 df_page_title = pd.DataFrame([str(page_title)], columns=['polymer_name'])
 df_page_title.to_csv('polymer_title.csv', index=False)
