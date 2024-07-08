@@ -7,7 +7,7 @@ The app consists of three functional parts:
 2) Data base: storing data in the database
 3) Visualization: presenting data in a dash app accoriding to selected parameters and a database content
 
-Used tools and libraries: 
+Used libraries and tools: 
 - UI (dash, plotly; Figma)
 - Code (numpy, pandas, logging, pytest)
 - Database (psycopg2; pgAdmin 4, PostgreSQL, Lucidchart)
