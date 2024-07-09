@@ -1,7 +1,8 @@
-# ui/dash_app/__init__.py
+# models/__init__.py
 
 # Optional: Import specific functions/classes from modules within the package
 # from .config.db_config import DB_SETTINGS
+# from models.db_requests import _convert_to_df
 
 # You can define variables or perform other initialization actions here if needed
 # For example:
